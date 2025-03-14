@@ -1,0 +1,29 @@
+报错解决方案：
+
+Error: out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/classes.jar contains class file cn/mik/Fartext.class, whose package name cn.mik is not in the whitelist build/make/core/tasks/check_boot_jars/package_whitelist.txt of packages allowed on the bootclasspath.
+[ 99% 90736/91445] //frameworks/base/packages/SystemUI:SystemUI-core kotlinc [common]
+frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/PulseExpansionHandler.kt:121:38: warning: 'get(Class<T!>!): T!' is deprecated. Deprecated in Java
+        mFalsingManager = Dependency.get(FalsingManager::class.java)
+                                     ^
+[ 99% 90739/91445] Target Java: out/target/common/obj/APPS/Dialer_intermediates/classes-full-debug.jar
+Note: Generating a Provider for com.android.dialer.glidephotomanager.impl.GlidePhotoManagerImpl. Prefer to run the dagger processor over that class instead.
+Note: [1] Wrote GeneratedAppGlideModule with: []
+FAILED: [W][2025-03-14T17:24:27+0800][36917] void cmdline::logParams(nsjconf_t *)():250 Process will be UID/EUID=0 in the global user namespace, and will have user root-level access to files
+[W][2025-03-14T17:24:27+0800][36917] void cmdline::logParams(nsjconf_t *)():260 Process will be GID/EGID=0 in the global user namespace, and will have group root-level access to files
+22:04:06 ninja failed with: exit status 1
+
+#### failed to build some targets (04:45:22 (hh:mm:ss)) ####
+
+
+
+解决方案：因为脱壳机目录：FartExt-main\frameworks\base\core\java目录下多了cn目录，所以解决办法如下：
+
+1.编辑白名单文件：
+vim build/make/core/tasks/check_boot_jars/package_whitelist.txt
+
+2.添加包名：
+# 在文件末尾添加：
+cn\.mik
+
+3.重新编译验证：
+make -j8 或者 time make -8
