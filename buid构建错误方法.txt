@@ -27,3 +27,7 @@ cn\.mik
 
 3.重新编译验证：
 make -j8 或者 time make -8
+
+
+
+其他问题：ext4目录：：：：device/google/marlin/sailfish/BoardConfig.mk
